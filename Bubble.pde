@@ -1,32 +1,33 @@
-class Bubble {
-  int bSize;
-  int[] bColor;
-  int x;
-  int y;
- 
-  //constructor: only job is to assign/initialize values
-  Bubble(){
-    bSize = (int)(Math.random()*80+20);
-    bColor = new int [4];
-    for(int i = 0; i < bColor.length; i++) {
-      bColor[i] = (int)(Math.random()*256);
-    }
-    x = (int)(Math.random()*width);
-    y = height;
-  }
-  
-  void rise_wiggle(){
-   //speed, x and y, speed based on size 
-   float rFactor = 0.01;
-   float r = (bSize*3) * rFactor * (float)Math.random();
-   int w = (int)(Math.random()*9)-4;
-   x += w;
-   y -= r;
-  }
-  
-  void show() {
-    fill(bColor[0], bColor[1], bColor[2], bColor[3]);
-    ellipse(x, y, bSize, bSize);
+int nBubbles = 100;
+int startI;
+int endI;
+int bubblesCreated;
+ArrayList<Bubble> aBub = new ArrayList<Bubble>();;
+int bSize;
+
+void setup() {
+  size(500,700);
+  background(255);
+  for(int i = 0; i < nBubbles; i++) {
+    //Bubble myBubble = new Bubble();
+    aBub.add(new Bubble());
   }
 }
 
+void draw(){
+  background(255);
+  startI = 0;
+  endI = 1;
+  //for (int j = startI; j < endI; j++) {
+    for(int i = 0; i < nBubbles; i++) {
+      aBub.get(i).rise_wiggle();
+      aBub.get(i).show();
+      if (aBub.get(i).y <= (-(aBub.get(i).bSize)/2)+5) {
+        aBub.remove(i);
+        i--;
+        aBub.add(new Bubble());
+      }
+    }
+    System.out.println(aBub.size());
+   //}
+}
