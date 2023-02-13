@@ -4,6 +4,7 @@ int endI;
 int bubblesCreated;
 ArrayList<Bubble> aBub = new ArrayList<Bubble>();;
 int bSize;
+boolean blue;
 
 void setup() {
   size(500,700);
@@ -22,10 +23,19 @@ void draw(){
     for(int i = 0; i < nBubbles; i++) {
       aBub.get(i).rise_wiggle();
       aBub.get(i).show();
-      if (aBub.get(i).y <= (-(aBub.get(i).bSize)/2)+5) {
+      if (aBub.get(i).blue == true) {
+        if (aBub.get(i).y <= (-(aBub.get(i).bSize)/2)+5) {
         aBub.remove(i);
         i--;
         aBub.add(new Bubble());
+        }
+      }
+      else {
+        if (aBub.get(i).y <= height/2) {
+        aBub.remove(i);
+        i--;
+        aBub.add(new Bubble());
+        }
       }
     }
     System.out.println(aBub.size());
