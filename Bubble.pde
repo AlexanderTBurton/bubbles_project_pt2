@@ -1,16 +1,23 @@
 class Bubble {
   int bSize;
-  int[] bColor;
+  boolean blue;
   int x;
   int y;
  
   //constructor: only job is to assign/initialize values
   Bubble(){
     bSize = (int)(Math.random()*80+20);
-    bColor = new int [4];
-    for(int i = 0; i < bColor.length; i++) {
-      bColor[i] = (int)(Math.random()*256);
+    double colorChooser = (Math.random())*2;
+    if (colorChooser >= 1) {
+      blue = true;
     }
+    else {
+      blue = false;
+    }
+    
+    /*for(int i = 0; i < bColor.length; i++) {
+      bColor[i] = (int)(Math.random()*256);
+    } */
     x = (int)(Math.random()*width);
     y = height;
     
@@ -26,7 +33,12 @@ class Bubble {
   }
   
   void show() {
-    fill(bColor[0], bColor[1], bColor[2], bColor[3]);
+    if (blue == true) {
+      fill(0,0,255,200);
+    }
+    else {
+      fill(255,0,0,200);
+    }
     ellipse(x, y, bSize, bSize);
   }
 }
